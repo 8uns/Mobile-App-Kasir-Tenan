@@ -1,5 +1,5 @@
-// final String baseurl = 'http://192.168.40.2/upbumonitoring/public/';
-final String baseurl = 'https://simpelbabullah.online/';
+final String baseurl = 'http://192.168.1.21/upbumonitoring/public/';
+// final String baseurl = 'https://simpelbabullah.online/';
 String username = '';
 String password = '';
 String token = '';

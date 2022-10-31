@@ -59,9 +59,9 @@ class _KasirProdukState extends State<KasirProduk> {
                                     Card(
                                       child: Container(
                                         padding: EdgeInsets.symmetric(
-                                          vertical: 5,
-                                          horizontal: 5,
-                                        ),
+                                            // vertical: 5,
+                                            // horizontal: 5,
+                                            ),
                                         child: IconButton(
                                           onPressed: () {
                                             // print('kurang 1');
@@ -81,20 +81,20 @@ class _KasirProdukState extends State<KasirProduk> {
                                       child: Container(
                                         padding: EdgeInsets.symmetric(
                                           vertical: 15,
-                                          horizontal: 30,
+                                          horizontal: 20,
                                         ),
                                         child: Text(
                                           qty.toString(),
-                                          style: TextStyle(fontSize: 40),
+                                          style: TextStyle(fontSize: 35),
                                         ),
                                       ),
                                     ),
                                     Card(
                                       child: Container(
                                         padding: EdgeInsets.symmetric(
-                                          vertical: 5,
-                                          horizontal: 5,
-                                        ),
+                                            // vertical: 5,
+                                            // horizontal: 5,
+                                            ),
                                         child: IconButton(
                                           onPressed: () {
                                             // print('tambah 1');
@@ -138,6 +138,9 @@ class _KasirProdukState extends State<KasirProduk> {
                                               body: {
                                                 'name': snapshot.data![index]
                                                         ['name']
+                                                    .toString(),
+                                                'product_id': snapshot
+                                                    .data![index]['product_id']
                                                     .toString(),
                                                 'price': snapshot.data![index]
                                                         ['price']
@@ -216,6 +219,15 @@ class _KasirProdukState extends State<KasirProduk> {
                       children: [
                         Text(
                           snapshot.data![index]['name'].toString(),
+                          textAlign: TextAlign.end,
+                          maxLines: 2,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        Text(
+                          "Qty: ${snapshot.data![index]['quantity'].toString()}",
                           textAlign: TextAlign.end,
                           maxLines: 2,
                           style: const TextStyle(
