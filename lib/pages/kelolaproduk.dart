@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter/material.dart';
+import 'package:kasir_tenan_0_1/pages/perbaruiproduk.dart';
 import './drawerApp.dart';
 import 'package:http/http.dart' as http;
 import '../config.dart';
@@ -87,7 +88,17 @@ class KelolaProduk extends StatelessWidget {
                         label: 'Hapus',
                       ),
                       SlidableAction(
-                        onPressed: null,
+                        onPressed: (context) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PerbaruiProduk(
+                                  snapshot.data![index]['product_id']
+                                      .toString(),
+                                  snapshot.data![index]['name'].toString(),
+                                  snapshot.data![index]['price'].toString()),
+                            ),
+                          );
+                        },
                         backgroundColor: Color(0xFF21B7CA),
                         foregroundColor: Colors.white,
                         icon: Icons.edit_note,
