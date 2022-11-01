@@ -1,16 +1,17 @@
 import 'dart:convert';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter/material.dart';
+import 'package:kasir_tenan_0_1/pages/tambahstokproduk.dart';
 import './drawerApp.dart';
 import 'package:http/http.dart' as http;
 import '../config.dart';
-import 'tambahproduk.dart';
+import 'kelolaproduk.dart';
 // import 'package:crypto/crypto.dart';
 
-class KelolaProduk extends StatelessWidget {
-  String produkApi = "${baseurl}api/produk/$token";
+class Inventaris extends StatelessWidget {
+  String produkApi = "${baseurl}api/inventaris/$token";
 
-  static const nameRoute = '/kelolaproduk';
+  static const nameRoute = '/inventaris';
 
   Future<List<dynamic>> _transaksi() async {
     var result = await http.get(Uri.parse(produkApi));
@@ -23,13 +24,13 @@ class KelolaProduk extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber[600],
-        title: Text("Kelola Produk"),
+        title: Text("Inventaris"),
         actions: [
           IconButton(
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => TambahProduk(),
+                  builder: (context) => TambahStokProduk(),
                 ),
               );
             },
@@ -73,41 +74,19 @@ class KelolaProduk extends StatelessWidget {
                         width: 50,
                       );
                 final item = index.toString();
-                return Slidable(
-                  endActionPane: ActionPane(
-                    motion: DrawerMotion(),
-                    children: [
-                      SlidableAction(
-                        onPressed: (context) {
-                          konfirmasiHapus(context, snapshot, index);
-                        },
-                        backgroundColor: Color(0xFFFE4A49),
-                        foregroundColor: Colors.white,
-                        icon: Icons.delete,
-                        label: 'Hapus',
-                      ),
-                      SlidableAction(
-                        onPressed: null,
-                        backgroundColor: Color(0xFF21B7CA),
-                        foregroundColor: Colors.white,
-                        icon: Icons.edit_note,
-                        label: 'Perbarui',
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      ListTile(
-                        leading: imageView,
-                        onTap: () {},
-                        title: Text("${snapshot.data![index]['name']} "),
-                        subtitle: Text("Rp. ${snapshot.data![index]['price']}"),
-                        trailing:
-                            Text("Stok: ${snapshot.data![index]['quantity']}"),
-                      ),
-                      const Divider(height: 10, thickness: 1),
-                    ],
-                  ),
+                return Column(
+                  children: [
+                    ListTile(
+                      leading: imageView,
+                      onTap: () {},
+                      title: Text("${snapshot.data![index]['name_product']} "),
+                      subtitle: Text(
+                          "${snapshot.data![index]['date']} | ${snapshot.data![index]['time']}"),
+                      trailing: Text(
+                          "Stok Masuk: ${snapshot.data![index]['qtytrans']}"),
+                    ),
+                    const Divider(height: 10, thickness: 1),
+                  ],
                 );
               },
             );
@@ -127,7 +106,8 @@ class KelolaProduk extends StatelessWidget {
           content: SingleChildScrollView(
             child: ListBody(
               children: [
-                Text("Yakin menghapus ${snapshot.data![index]['name']} ?"),
+                Text(
+                    "Yakin menghapus ${snapshot.data![index]['name_product']} ?"),
               ],
             ),
           ),

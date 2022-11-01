@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:kasir_tenan_0_1/pages/billing.dart';
+import 'package:kasir_tenan_0_1/pages/inventaris.dart';
 import 'package:kasir_tenan_0_1/pages/kelolaproduk.dart';
 import 'package:kasir_tenan_0_1/pages/pengaturan.dart';
 import '../config.dart';
@@ -58,40 +59,6 @@ class DrawerApp extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => Transaksi(),
-                ),
-              );
-            },
-            leading: Icon(
-              Icons.receipt_long,
-              size: 35,
-            ),
-            title: const Text(
-              "Riwayat Transaksi",
-              style: TextStyle(fontSize: 15),
-            ),
-          ),
-          ListTile(
-            onTap: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => KelolaProduk(),
-                ),
-              );
-            },
-            leading: Icon(
-              Icons.inventory,
-              size: 35,
-            ),
-            title: const Text(
-              "Kelola Produk",
-              style: TextStyle(fontSize: 15),
-            ),
-          ),
-          ListTile(
-            onTap: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
                   builder: (context) => Billing(),
                 ),
               );
@@ -128,6 +95,66 @@ class DrawerApp extends StatelessWidget {
                   },
                 ),
               ],
+            ),
+          ),
+          Divider(height: 25, thickness: 1),
+          const Padding(
+            padding: EdgeInsets.only(left: 20.0, top: 10, bottom: 10),
+            child: Text("Katalog",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black54,
+                )),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => KelolaProduk(),
+                ),
+              );
+            },
+            leading: Icon(
+              Icons.view_in_ar_rounded,
+              size: 35,
+            ),
+            title: const Text(
+              "Kelola Produk",
+              style: TextStyle(fontSize: 15),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => Inventaris(),
+                ),
+              );
+            },
+            leading: Icon(
+              Icons.inventory,
+              size: 35,
+            ),
+            title: const Text(
+              "Inventaris",
+              style: TextStyle(fontSize: 15),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => Transaksi(),
+                ),
+              );
+            },
+            leading: Icon(
+              Icons.receipt_long,
+              size: 35,
+            ),
+            title: const Text(
+              "Riwayat Transaksi",
+              style: TextStyle(fontSize: 15),
             ),
           ),
           Divider(height: 25, thickness: 1),

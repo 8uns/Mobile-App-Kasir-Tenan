@@ -23,6 +23,8 @@ class _TambahProdukState extends State<TambahProduk> {
 
   String? name;
 
+  String? quantity;
+
   String? base64Img;
 
   String? price;
@@ -125,6 +127,26 @@ class _TambahProdukState extends State<TambahProduk> {
                             child: TextFormField(
                               keyboardType: TextInputType.number,
                               decoration: const InputDecoration(
+                                hintText: "0",
+                                labelText: "Stok",
+                                icon: Icon(Icons.price_change),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Masukan Stok Barang';
+                                }
+                                quantity = value;
+                                return null;
+                              },
+                            ),
+                          ),
+                          Container(
+                            color: Colors.white,
+                            padding: const EdgeInsets.all(15),
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(
                                 hintText: "Rp. ...",
                                 labelText: "Harga Barang",
                                 icon: Icon(Icons.price_change),
@@ -200,16 +222,21 @@ class _TambahProdukState extends State<TambahProduk> {
               children: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    shape: StadiumBorder(),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
                     padding: EdgeInsets.symmetric(
                       vertical: 15,
-                      horizontal: 30,
+                      horizontal: MediaQuery.of(context).size.width * 0.3,
                     ),
                   ),
                   onPressed: () async {
-                    // print('test animatio');
-                    setState(() => isLoading = true);
-                    await reqTambahProduk(context);
+                    if (name != null && quantity != null && price != null) {
+                      setState(() => isLoading = true);
+                      await reqTambahProduk(context);
+                    } else {
+                      _formKey.currentState!.validate();
+                    }
                   },
                   child: isLoading
                       ? CircularProgressIndicator(
@@ -245,35 +272,34 @@ class _TambahProdukState extends State<TambahProduk> {
 
   Future<void> reqTambahProduk(BuildContext context) async {
     // print(base64Img);
-    if (_formKey.currentState!.validate()) {
-      var url = Uri.parse('${baseurl}api/produk/$token');
-      var response = await http.post(
-        url,
-        body: {
-          'name': name,
-          'price': price,
-          'tenan_id': tenan_id,
-          'picture_name': filename,
-          'picture': base64Img,
-        },
+    var url = Uri.parse('${baseurl}api/produk/$token');
+    var response = await http.post(
+      url,
+      body: {
+        'name': name,
+        'quantity': quantity,
+        'price': price,
+        'tenan_id': tenan_id,
+        'picture_name': filename,
+        'picture': base64Img,
+      },
+    );
+    // print('${baseurl}api/produk/$token');
+
+    if (response.statusCode == 200) {
+      // print(response.body);
+
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => KelolaProduk(),
+        ),
       );
-      // print('${baseurl}api/produk/$token');
-
-      if (response.statusCode == 200) {
-        // print(response.body);
-
-        // ignore: use_build_context_synchronously
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => KelolaProduk(),
-          ),
-        );
-      } else {
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Gagal Menyimpan Data! ulangi.')),
-        );
-      }
+    } else {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Gagal Menyimpan Data! ulangi.')),
+      );
     }
   }
 
