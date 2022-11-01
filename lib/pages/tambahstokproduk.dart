@@ -209,7 +209,7 @@ class _TambahStokProdukState extends State<TambahStokProduk> {
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => Inventaris(),
+          builder: (context) => Inventaris(''),
         ),
       );
     } else {

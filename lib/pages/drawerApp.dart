@@ -127,7 +127,7 @@ class DrawerApp extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => Inventaris(),
+                  builder: (context) => Inventaris(''),
                 ),
               );
             },
@@ -144,7 +144,7 @@ class DrawerApp extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => Transaksi(),
+                  builder: (context) => Transaksi(''),
                 ),
               );
             },

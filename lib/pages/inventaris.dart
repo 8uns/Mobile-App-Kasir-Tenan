@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:kasir_tenan_0_1/pages/tambahstokproduk.dart';
 import './drawerApp.dart';
 import 'package:http/http.dart' as http;
@@ -7,23 +8,39 @@ import '../config.dart';
 import 'kelolaproduk.dart';
 // import 'package:crypto/crypto.dart';
 
-class Inventaris extends StatelessWidget {
-  String produkApi = "${baseurl}api/inventaris/$token";
-
+class Inventaris extends StatefulWidget {
   static const nameRoute = '/inventaris';
+  String dateTrans;
 
+  Inventaris(this.dateTrans);
+  @override
+  State<Inventaris> createState() => _InventarisState(dateTrans);
+}
+
+class _InventarisState extends State<Inventaris> {
+  _InventarisState(this.dateTrans);
+  String dateTrans;
+
+  String produkApi = "${baseurl}api/inventaris/$token";
   Future<List<dynamic>> _transaksi() async {
-    var result = await http.get(Uri.parse(produkApi));
+    var result = await http.post(
+      Uri.parse(produkApi),
+      body: {
+        'date': dateTrans,
+      },
+    );
     return json.decode(result.body)['data'];
   }
 
   @override
   Widget build(BuildContext context) {
+    String dates = dateTrans != '' ? ': ${dateTrans}' : '';
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber[600],
-        title: Text("Inventaris"),
+        title: Text("Inventaris ${dates}"),
         actions: [
           IconButton(
             onPressed: () {
@@ -41,6 +58,31 @@ class Inventaris extends StatelessWidget {
       ),
       drawer: DrawerApp(),
       body: futureTransaksi(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          DateTime? pickedDate = await showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(
+                2000), //DateTime.now() - not to allow to choose before today.
+            lastDate: DateTime(2101),
+          );
+
+          if (pickedDate != null) {
+            String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+            dateTrans = formattedDate; //set output date to TextField value.
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => Inventaris(formattedDate),
+              ),
+            );
+          } else {
+            print("Date is not selected");
+          }
+        },
+        tooltip: 'Pilih Berdasarkan Tanggal',
+        child: const Icon(Icons.calendar_month_sharp),
+      ),
     );
   }
 

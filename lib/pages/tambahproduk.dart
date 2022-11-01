@@ -45,12 +45,10 @@ class _TambahProdukState extends State<TambahProduk> {
       setState(() {
         // ignore: unnecessary_this
         this.tmpImg = imageTemp;
-        // print(imageTemp);
       });
       // ignore: unused_catch_clause
     } on PlatformException catch (e) {
       // ignore: avoid_print
-      // print('Gagal pick image');
     }
   }
 
@@ -66,12 +64,10 @@ class _TambahProdukState extends State<TambahProduk> {
       setState(() {
         // ignore: unnecessary_this
         this.tmpImg = imageTemp;
-        // print(imageTemp);
       });
       // ignore: unused_catch_clause
     } on PlatformException catch (e) {
       // ignore: avoid_print
-      // print('Gagal pick image');
     }
   }
 
@@ -269,7 +265,6 @@ class _TambahProdukState extends State<TambahProduk> {
   }
 
   Future<void> reqTambahProduk(BuildContext context) async {
-    // print(base64Img);
     var url = Uri.parse('${baseurl}api/produk/$token');
     var response = await http.post(
       url,
@@ -282,11 +277,8 @@ class _TambahProdukState extends State<TambahProduk> {
         'picture': base64Img,
       },
     );
-    // print('${baseurl}api/produk/$token');
 
     if (response.statusCode == 200) {
-      // print(response.body);
-
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(

@@ -1,31 +1,77 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import './drawerApp.dart';
 import 'package:http/http.dart' as http;
 import '../config.dart';
-// import 'package:crypto/crypto.dart';
 
-class Transaksi extends StatelessWidget {
-  String transaksiApi = "${baseurl}api/transaksi/$token";
-
+class Transaksi extends StatefulWidget {
   static const nameRoute = '/transaksi';
+  String dateTrans;
 
+  Transaksi(this.dateTrans);
+
+  @override
+  State<Transaksi> createState() => _TransaksiState(dateTrans);
+}
+
+TextEditingController dateinput = TextEditingController();
+
+class _TransaksiState extends State<Transaksi> {
+  _TransaksiState(this.dateTrans);
+  String dateTrans;
+
+  String transaksiApi = "${baseurl}api/transaksi/$token";
   Future<List<dynamic>> _transaksi() async {
-    var result = await http.get(Uri.parse(transaksiApi));
+    var result = await http.post(
+      Uri.parse(transaksiApi),
+      body: {
+        'date': dateTrans,
+      },
+    );
+
     return json.decode(result.body)['data'];
   }
 
   @override
   Widget build(BuildContext context) {
+    String dates = dateTrans != '' ? ': ${dateTrans}' : '';
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber[600],
-        title: Text("Riwayat Transaksi"),
+        title: Text("Riwayat Transaksi ${dates}"),
       ),
       drawer: DrawerApp(),
       body: futureTransaksi(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          DateTime? pickedDate = await showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(
+                2000), //DateTime.now() - not to allow to choose before today.
+            lastDate: DateTime(2101),
+          );
+
+          if (pickedDate != null) {
+            String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+
+            dateTrans = formattedDate; //set output date to TextField value.
+
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => Transaksi(formattedDate),
+              ),
+            );
+          } else {
+            print("Date is not selected");
+          }
+        },
+        tooltip: 'Pilih Berdasarkan Tanggal',
+        child: const Icon(Icons.calendar_month_sharp),
+      ),
     );
   }
 

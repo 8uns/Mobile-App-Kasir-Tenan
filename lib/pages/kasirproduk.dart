@@ -82,7 +82,7 @@ class _KasirProdukState extends State<KasirProduk> {
                                                   .pushReplacement(
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      Inventaris(),
+                                                      Inventaris(''),
                                                 ),
                                               );
                                             },
