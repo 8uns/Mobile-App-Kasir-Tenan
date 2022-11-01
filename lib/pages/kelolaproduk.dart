@@ -141,9 +141,6 @@ class KelolaProduk extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () async {
-                // print("${snapshot.data![index]['name']}");
-                // print("id : ${snapshot.data![index]['product_id']}");
-
                 var url = Uri.parse(
                     '${baseurl}api/produk/$token/${snapshot.data![index]['product_id']}');
                 var response = await http.delete(url);
@@ -158,9 +155,6 @@ class KelolaProduk extends StatelessWidget {
                     const SnackBar(content: Text('Gagal Menghapus Data!')),
                   );
                 }
-
-                // print(
-                //     '${baseurl}api/produk/2222/${snapshot.data![index]['product_id']}');
               },
             ),
           ],

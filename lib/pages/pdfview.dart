@@ -1,9 +1,7 @@
 // import 'dart:html';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:kasir_tenan_0_1/pages/prinpdf.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import 'package:printing/printing.dart';
 
 class PdfViewer extends StatefulWidget {
   String colorbase;

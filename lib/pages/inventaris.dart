@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter/material.dart';
 import 'package:kasir_tenan_0_1/pages/tambahstokproduk.dart';
 import './drawerApp.dart';
@@ -121,9 +120,6 @@ class Inventaris extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () async {
-                // print("${snapshot.data![index]['name']}");
-                // print("id : ${snapshot.data![index]['product_id']}");
-
                 var url = Uri.parse(
                     '${baseurl}api/produk/$token/${snapshot.data![index]['product_id']}');
                 var response = await http.delete(url);
@@ -138,9 +134,6 @@ class Inventaris extends StatelessWidget {
                     const SnackBar(content: Text('Gagal Menghapus Data!')),
                   );
                 }
-
-                // print(
-                //     '${baseurl}api/produk/2222/${snapshot.data![index]['product_id']}');
               },
             ),
           ],

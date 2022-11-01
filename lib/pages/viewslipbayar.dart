@@ -21,7 +21,6 @@ class ViewSlipBayar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print("${baseurl}file/payment/$tenan_id/$img");
     return Scaffold(
       appBar: AppBar(
         title: Text(

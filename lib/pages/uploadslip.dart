@@ -46,12 +46,10 @@ class _UploadSlipState extends State<UploadSlip> {
       setState(() {
         // ignore: unnecessary_this
         this.tmpImg = imageTemp;
-        // print(imageTemp);
       });
       // ignore: unused_catch_clause
     } on PlatformException catch (e) {
       // ignore: avoid_print
-      // print('Gagal pick image');
     }
   }
 
@@ -67,12 +65,10 @@ class _UploadSlipState extends State<UploadSlip> {
       setState(() {
         // ignore: unnecessary_this
         this.tmpImg = imageTemp;
-        // print(imageTemp);
       });
       // ignore: unused_catch_clause
     } on PlatformException catch (e) {
       // ignore: avoid_print
-      // print('Gagal pick image');
     }
   }
 
@@ -219,9 +215,6 @@ class _UploadSlipState extends State<UploadSlip> {
 
   Future<void> reqUploadSlip(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      // print('${baseurl}api/billing/$token/${idbilling}');
-      // print(filename);
-      // print(tenan_id);
       var url = Uri.parse('${baseurl}api/billing/$token/${idbilling}');
       var response = await http.post(
         url,
@@ -234,8 +227,6 @@ class _UploadSlipState extends State<UploadSlip> {
       );
 
       if (response.statusCode == 200) {
-        // print(response.body);
-
         // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(

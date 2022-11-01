@@ -75,13 +75,9 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    // print("login");
     getPreferenceLogin();
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Login Simple"),
-      // ),
       body: Form(
         key: _formKey,
         child: Container(
@@ -209,10 +205,8 @@ class _LoginState extends State<Login> {
                                   );
 
                                   if (response.statusCode == 200) {
-                                    // print(response.body);
                                     var hasil = jsonDecode(response.body);
                                     if (hasil['condition']) {
-                                      // print(hasil['data']['name']);
                                       setPreferenseLogin(hasil['data']);
                                     } else {
                                       ScaffoldMessenger.of(context)

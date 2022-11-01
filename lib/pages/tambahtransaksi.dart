@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:kasir_tenan_0_1/pages/kasir.dart';
 import 'package:kasir_tenan_0_1/pages/notifkembalian.dart';
 
 import '../config.dart';
@@ -53,12 +52,10 @@ class _TambahTransaksiState extends State<TambahTransaksi> {
       setState(() {
         // ignore: unnecessary_this
         this.tmpImg = imageTemp;
-        // print(imageTemp);
       });
       // ignore: unused_catch_clause
     } on PlatformException catch (e) {
       // ignore: avoid_print
-      // print('Gagal pick image');
     }
   }
 
@@ -73,12 +70,10 @@ class _TambahTransaksiState extends State<TambahTransaksi> {
       setState(() {
         // ignore: unnecessary_this
         this.tmpImg = imageTemp;
-        // print(imageTemp);
       });
       // ignore: unused_catch_clause
     } on PlatformException catch (e) {
       // ignore: avoid_print
-      // print('Gagal pick image');
     }
   }
 
@@ -182,18 +177,10 @@ class _TambahTransaksiState extends State<TambahTransaksi> {
         );
       } else {
         var kembalian = payn - totaltrans;
-        // print(kembalian);
-        // print(pay.toString());
-        // print(transid);
-        // print('${baseurl}api/transaksi/$token/bayar/$transid');
-        // print('${baseurl}api/transaksi/2222/bayar/$transid');
         var url = Uri.parse('${baseurl}api/transaksi/$token/bayar/$transid');
         var response = await http.get(url);
 
         if (response.statusCode == 200) {
-          // print(response.body);
-
-          //   // ignore: use_build_context_synchronously
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => NotifKembalian(kembalian.toString()),

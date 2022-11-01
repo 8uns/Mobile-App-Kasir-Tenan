@@ -41,7 +41,6 @@ class Transaksi extends StatelessWidget {
                   children: [
                     ListTile(
                       onTap: () {
-                        // print("tab transaksi");
                         showdialogTransaksiDetail(context, snapshot, index,
                             "${baseurl}api/item/$token/${snapshot.data![index]['transaction_id']}");
                       },

@@ -98,11 +98,6 @@ class ItemTransaksi extends StatelessWidget {
                                               Colors.red[900], // background
                                         ),
                                         onPressed: () async {
-                                          // print('cancel');
-                                          // print(snapshot.data!['data'][0]
-                                          //     ['transaction_id']);
-                                          // print(
-                                          //     "${baseurl}api/transaksi/$token/${snapshot.data!['data'][0]['transaction_id']}");
                                           var url = Uri.parse(
                                               "${baseurl}api/transaksi/$token/${snapshot.data!['data'][0]['transaction_id']}");
                                           var response = await http.delete(url);
@@ -151,10 +146,6 @@ class ItemTransaksi extends StatelessWidget {
                           decoration: BoxDecoration(color: Colors.teal),
                           child: IconButton(
                             onPressed: () {
-                              // print(
-                              //     snapshot.data!['data'][0]['transaction_id']);
-                              // print(snapshot.data!['data'][0]['total']);
-
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => TambahTransaksi(
@@ -197,9 +188,7 @@ class ItemTransaksi extends StatelessWidget {
                             color: Colors.grey[700],
                           ),
                           child: IconButton(
-                            onPressed: () {
-                              // print('mati');
-                            },
+                            onPressed: () {},
                             color: Colors.white70,
                             icon: Icon(Icons.calculate),
                             iconSize: 50,

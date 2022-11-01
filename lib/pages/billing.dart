@@ -119,7 +119,6 @@ class Billing extends StatelessWidget {
                                       "${baseurl}file/billing/${tenan_id}/${snapshot.data![index]['file_konsesi']}",
                                 )),
                       );
-                      // print( '${baseurl}file/billing/${tenan_id}/${snapshot.data![index]['file_konsesi']}');
                     },
                     leading: const Icon(
                       Icons.request_quote,
@@ -145,7 +144,6 @@ class Billing extends StatelessWidget {
                                       "${baseurl}file/billing/${tenan_id}/${snapshot.data![index]['file_listrik']}",
                                 )),
                       );
-                      // print( '${baseurl}file/billing/${tenan_id}/${snapshot.data![index]['file_listrik']}');
                     },
                     leading: const Icon(
                       Icons.request_quote,
@@ -171,7 +169,6 @@ class Billing extends StatelessWidget {
                                       "${baseurl}file/billing/${tenan_id}/${snapshot.data![index]['file_sewatempat']}",
                                 )),
                       );
-                      // print( '${baseurl}file/billing/${tenan_id}/${snapshot.data![index]['file_sewatempat']}');
                     },
                     leading: const Icon(
                       Icons.request_quote,
@@ -200,7 +197,6 @@ class Billing extends StatelessWidget {
                                             "${baseurl}file/billing/${tenan_id}/${snapshot.data![index]['file_billing']}",
                                       )),
                             );
-                            // print( '${baseurl}file/billing/${tenan_id}/${snapshot.data![index]['file_billing']}');
                           },
                           leading: const Icon(
                             Icons.request_quote,

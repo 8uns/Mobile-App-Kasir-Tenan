@@ -23,8 +23,6 @@ class _OpeningState extends State<Opening> {
 
   @override
   Widget build(BuildContext context) {
-    // print("opening");
-
     return Scaffold(
       body: Container(
         color: Colors.white,

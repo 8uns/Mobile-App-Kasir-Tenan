@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:kasir_tenan_0_1/pages/inventaris.dart';
-
 import '../config.dart';
-import 'kelolaproduk.dart';
 
 List<String> listSelect = <String>['One', 'Two', 'Three', 'Four'];
 
@@ -30,7 +28,6 @@ class _TambahStokProdukState extends State<TambahStokProduk> {
     setState(() {
       dataProduct = data;
     });
-    print(dataProduct[0]['product_id']);
     return "success";
   }
 
@@ -99,9 +96,6 @@ class _TambahStokProdukState extends State<TambahStokProduk> {
                                     // ),
                                     items: dataProduct
                                         .map<DropdownMenuItem<String>>((item) {
-                                      print(item['product_id'].toString() +
-                                          ', ' +
-                                          item['name']);
                                       return DropdownMenuItem<String>(
                                         value: item['product_id'].toString(),
                                         child: Text(item['name']),
@@ -204,18 +198,14 @@ class _TambahStokProdukState extends State<TambahStokProduk> {
 
   Future<void> reqTambahStokProduk(BuildContext context) async {
     var url = Uri.parse('${baseurl}api/inventaris/$token/${product_id}');
-    print(url);
     var response = await http.post(
       url,
       body: {
         'quantity': quantity,
       },
     );
-    // print('${baseurl}api/produk/$token');
 
     if (response.statusCode == 200) {
-      // print(response.body);
-
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
