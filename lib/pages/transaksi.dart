@@ -41,37 +41,41 @@ class _TransaksiState extends State<Transaksi> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber[600],
-        title: Text("Riwayat Transaksi ${dates}"),
+        title: Text("Transaksi ${dates}"),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              DateTime? pickedDate = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(
+                    2000), //DateTime.now() - not to allow to choose before today.
+                lastDate: DateTime(2101),
+              );
+
+              if (pickedDate != null) {
+                String formattedDate =
+                    DateFormat('yyyy-MM-dd').format(pickedDate);
+
+                dateTrans = formattedDate; //set output date to TextField value.
+
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => Transaksi(formattedDate),
+                  ),
+                );
+              } else {
+                print("Date is not selected");
+              }
+            },
+            icon: const Icon(
+              Icons.calendar_month_sharp,
+            ),
+          )
+        ],
       ),
       drawer: DrawerApp(),
       body: futureTransaksi(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          DateTime? pickedDate = await showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(
-                2000), //DateTime.now() - not to allow to choose before today.
-            lastDate: DateTime(2101),
-          );
-
-          if (pickedDate != null) {
-            String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-
-            dateTrans = formattedDate; //set output date to TextField value.
-
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => Transaksi(formattedDate),
-              ),
-            );
-          } else {
-            print("Date is not selected");
-          }
-        },
-        tooltip: 'Pilih Berdasarkan Tanggal',
-        child: const Icon(Icons.calendar_month_sharp),
-      ),
     );
   }
 

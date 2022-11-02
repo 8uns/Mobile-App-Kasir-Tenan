@@ -25,23 +25,20 @@ class KelolaProduk extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.amber[600],
         title: Text("Kelola Produk"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => TambahProduk(),
-                ),
-              );
-            },
-            icon: const Icon(
-              Icons.add_circle,
-            ),
-          )
-        ],
       ),
       drawer: DrawerApp(),
       body: futureTransaksi(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => TambahProduk(),
+            ),
+          );
+        },
+        tooltip: 'Tambah Produk Baru',
+        child: const Icon(Icons.add_circle),
+      ),
     );
   }
 

@@ -42,15 +42,30 @@ class _InventarisState extends State<Inventaris> {
         title: Text("Inventaris ${dates}"),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => TambahStokProduk(),
-                ),
+            onPressed: () async {
+              DateTime? pickedDate = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(
+                    2000), //DateTime.now() - not to allow to choose before today.
+                lastDate: DateTime(2101),
               );
+
+              if (pickedDate != null) {
+                String formattedDate =
+                    DateFormat('yyyy-MM-dd').format(pickedDate);
+                dateTrans = formattedDate; //set output date to TextField value.
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => Inventaris(formattedDate),
+                  ),
+                );
+              } else {
+                print("Date is not selected");
+              }
             },
             icon: const Icon(
-              Icons.add_circle,
+              Icons.calendar_month_sharp,
             ),
           )
         ],
@@ -58,29 +73,15 @@ class _InventarisState extends State<Inventaris> {
       drawer: DrawerApp(),
       body: futureTransaksi(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          DateTime? pickedDate = await showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(
-                2000), //DateTime.now() - not to allow to choose before today.
-            lastDate: DateTime(2101),
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => TambahStokProduk(),
+            ),
           );
-
-          if (pickedDate != null) {
-            String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-            dateTrans = formattedDate; //set output date to TextField value.
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => Inventaris(formattedDate),
-              ),
-            );
-          } else {
-            print("Date is not selected");
-          }
         },
-        tooltip: 'Pilih Berdasarkan Tanggal',
-        child: const Icon(Icons.calendar_month_sharp),
+        tooltip: 'Tambah Stok Produk',
+        child: const Icon(Icons.add_circle),
       ),
     );
   }
