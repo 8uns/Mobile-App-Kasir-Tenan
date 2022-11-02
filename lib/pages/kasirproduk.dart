@@ -135,7 +135,7 @@ class _KasirProdukState extends State<KasirProduk> {
     setState(() {
       qty = 1;
     });
-    if (snapshot.data![index]['quantity'] == 0) {
+    if (snapshot.data![index]['quantity'] <= 0) {
       showDialog(
           context: context,
           builder: (BuildContext context) {

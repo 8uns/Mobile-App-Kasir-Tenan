@@ -24,7 +24,14 @@ class Billing extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.amber[600],
         title: Text("Tagihan & Billing"),
-        actions: [],
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.calendar_month_sharp,
+            ),
+          )
+        ],
       ),
       drawer: DrawerApp(),
       body: futureTransaksi(),
