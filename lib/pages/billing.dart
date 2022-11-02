@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:kasir_tenan_0_1/pages/pdfview.dart';
 import 'package:kasir_tenan_0_1/pages/uploadslip.dart';
 import 'package:kasir_tenan_0_1/pages/viewslipbayar.dart';
@@ -8,29 +9,68 @@ import 'package:http/http.dart' as http;
 import '../config.dart';
 
 class Billing extends StatelessWidget {
-  String billingApi = "${baseurl}api/billing/$token";
-
   static const nameRoute = '/billing';
 
+  final String ambilTahun;
+  Billing(this.ambilTahun);
+
+  String billingApi = "${baseurl}api/billing/$token/tahun/";
+
   Future<List<dynamic>> _billing() async {
-    var result = await http.get(Uri.parse(billingApi));
+    var result = await http.get(Uri.parse(billingApi + ambilTahun));
     return json.decode(result.body)['data'];
   }
 
   @override
   Widget build(BuildContext context) {
+    List<String> years = [
+      for (var i =
+              int.parse(DateFormat('yyyy').format(DateTime.now()).toString());
+          i >= 2019;
+          i--)
+        i.toString()
+    ];
+
     Size size = MediaQuery.of(context).size;
+    String showTahun = ambilTahun != '' ? ': ' + ambilTahun.toString() : '';
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber[600],
-        title: Text("Tagihan & Billing"),
+        title: Text("Tagihan & Billing " + showTahun),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.calendar_month_sharp,
+          Container(
+            // width: 1,
+            margin: EdgeInsets.only(
+              right: 15,
             ),
-          )
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                icon: Icon(
+                  Icons.calendar_month_sharp,
+                  color: Colors.black,
+                ),
+                // hint: Text(
+                //   "Year",
+                // ),
+                items: years.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (String? value) {
+                  print("klick year : $value");
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => Billing(value.toString()),
+                    ),
+                  );
+                },
+                value: null,
+              ),
+            ),
+          ),
         ],
       ),
       drawer: DrawerApp(),
@@ -216,6 +256,8 @@ class Billing extends StatelessWidget {
                           ),
                         ),
                       ),
+                Divider(height: 25, thickness: 1),
+                Divider(height: 25, thickness: 1),
                 (snapshot.data![index]['file_billing'] == '' ||
                         snapshot.data![index]['file_billing'] == null)
                     ? SizedBox()

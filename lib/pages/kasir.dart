@@ -64,7 +64,7 @@ class Kasir extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => Billing(),
+                                builder: (context) => Billing(''),
                               ),
                             );
                           },
@@ -95,7 +95,7 @@ class Kasir extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => Billing(),
+                                builder: (context) => Billing(''),
                               ),
                             );
                           },

@@ -106,6 +106,7 @@ class _TambahStokProdukState extends State<TambahStokProduk> {
                                         _dropdownValue = value!;
                                         product_id = _dropdownValue;
                                       });
+                                      print(_dropdownValue);
                                     },
                                     value: _dropdownValue,
                                   ),

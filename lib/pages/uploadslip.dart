@@ -230,7 +230,7 @@ class _UploadSlipState extends State<UploadSlip> {
         // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => Billing(),
+            builder: (context) => Billing(''),
           ),
         );
       } else {
