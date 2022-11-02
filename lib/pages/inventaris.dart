@@ -6,7 +6,6 @@ import './drawerApp.dart';
 import 'package:http/http.dart' as http;
 import '../config.dart';
 import 'kelolaproduk.dart';
-// import 'package:crypto/crypto.dart';
 
 class Inventaris extends StatefulWidget {
   static const nameRoute = '/inventaris';
@@ -86,6 +85,13 @@ class _InventarisState extends State<Inventaris> {
     );
   }
 
+  String lengthDecodebase64(String bytes) {
+    if (bytes.length % 4 > 0) {
+      bytes += '=' * (4 - bytes.length % 4);
+    }
+    return bytes;
+  }
+
   FutureBuilder<List<dynamic>> futureTransaksi() {
     return FutureBuilder<List<dynamic>>(
         future: _transaksi(),
@@ -94,6 +100,9 @@ class _InventarisState extends State<Inventaris> {
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
+                String bytes = snapshot.data![index]['picture'].toString();
+                bytes = lengthDecodebase64(bytes);
+                final _byteImage = Base64Decoder().convert(bytes);
                 const icon2 = Icon(
                   Icons.image_not_supported_sharp,
                   size: 45,
@@ -104,8 +113,8 @@ class _InventarisState extends State<Inventaris> {
                 );
                 var imageView = snapshot.data![index]['picture'] == ""
                     ? icon1
-                    : Image.network(
-                        "${baseurl}img/produk/$tenan_id/${snapshot.data![index]['picture']}",
+                    : Image.memory(
+                        _byteImage,
                         // loadingBuilder: (context, child, loadingProgress) =>
                         //     (loadingProgress == null)
                         //         ? child

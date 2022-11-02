@@ -29,14 +29,14 @@ class _TambahProdukState extends State<TambahProduk> {
 
   File? tmpImg;
 
-  String filename = '';
+  // String filename = '';
 
   // ignore: non_constant_identifier_names
 
-  Future pickImage() async {
+  Future getImage() async {
     try {
-      final image = await ImagePicker()
-          .pickImage(source: ImageSource.gallery, imageQuality: 25);
+      final image = await ImagePicker().pickImage(
+          source: ImageSource.gallery, imageQuality: 55, maxWidth: 300);
 
       if (image == null) return;
 
@@ -54,8 +54,8 @@ class _TambahProdukState extends State<TambahProduk> {
 
   Future tagImage() async {
     try {
-      final image = await ImagePicker()
-          .pickImage(source: ImageSource.camera, imageQuality: 25);
+      final image = await ImagePicker().pickImage(
+          source: ImageSource.camera, imageQuality: 55, maxWidth: 300);
 
       if (image == null) return;
 
@@ -253,7 +253,7 @@ class _TambahProdukState extends State<TambahProduk> {
   Widget cekImage() {
     final tmpImg = this.tmpImg;
     if (tmpImg != null) {
-      filename = tmpImg.path.split('/').last;
+      // filename = tmpImg.path.split('/').last;
       base64Img = base64Encode(tmpImg.readAsBytesSync());
     } else {
       base64Img = '';
@@ -273,7 +273,7 @@ class _TambahProdukState extends State<TambahProduk> {
         'quantity': quantity,
         'price': price,
         'tenan_id': tenan_id,
-        'picture_name': filename,
+        // 'picture_name': filename,
         'picture': base64Img,
       },
     );
@@ -313,7 +313,7 @@ class _TambahProdukState extends State<TambahProduk> {
               children: [
                 OutlinedButton(
                   onPressed: () {
-                    pickImage();
+                    getImage();
                     Navigator.of(context).pop();
                   },
                   child: Column(

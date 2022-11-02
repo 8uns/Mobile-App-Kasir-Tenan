@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:kasir_tenan_0_1/pages/inventaris.dart';
@@ -20,6 +21,7 @@ class _KasirProdukState extends State<KasirProduk> {
 
   @override
   Widget build(BuildContext context) {
+    String bytes;
     return Container(
       child: FutureBuilder<List<dynamic>>(
         future: _produkData(),
@@ -35,6 +37,9 @@ class _KasirProdukState extends State<KasirProduk> {
               itemBuilder: (context, index) {
                 // var img = snapshot.data![index]['picture'].toString();
 
+                bytes = snapshot.data![index]['picture'].toString();
+                bytes = lengthDecodebase64(bytes);
+                final _byteImage = base64Decode(bytes);
                 return GridTile(
                   // ignore: sort_child_properties_last
                   child: InkResponse(
@@ -49,8 +54,8 @@ class _KasirProdukState extends State<KasirProduk> {
                               Icons.image,
                               size: 45,
                             )
-                          : Image.network(
-                              "${baseurl}img/produk/$tenan_id/${snapshot.data![index]['picture']}",
+                          : Image.memory(
+                              _byteImage,
                               // loadingBuilder: (context, child, loadingProgress) =>
                               //     (loadingProgress == null)
                               //      /   ? child
@@ -116,6 +121,13 @@ class _KasirProdukState extends State<KasirProduk> {
         },
       ),
     );
+  }
+
+  String lengthDecodebase64(String bytes) {
+    if (bytes.length % 4 > 0) {
+      bytes += '=' * (4 - bytes.length % 4);
+    }
+    return bytes;
   }
 
   Future<void> ModelAddProductToTrans(AsyncSnapshot<List<dynamic>> snapshot,

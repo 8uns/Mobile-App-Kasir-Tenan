@@ -10,12 +10,12 @@ import 'kelolaproduk.dart';
 // ignore: use_key_in_widget_constructors
 class PerbaruiProduk extends StatefulWidget {
   static const nameRoute = '/tambahproduk';
-  String product_id, name, price;
-  PerbaruiProduk(this.product_id, this.name, this.price);
+  String product_id, name, price, picture;
+  PerbaruiProduk(this.product_id, this.name, this.price, this.picture);
 
   @override
   State<PerbaruiProduk> createState() =>
-      _PerbaruiProdukState(product_id, name, price);
+      _PerbaruiProdukState(product_id, name, price, picture);
 }
 
 class _PerbaruiProdukState extends State<PerbaruiProduk> {
@@ -23,7 +23,9 @@ class _PerbaruiProdukState extends State<PerbaruiProduk> {
   final ImagePicker _picker = ImagePicker();
 
   String? name;
+  String? pictures;
 
+  // ignore: non_constant_identifier_names
   String? product_id;
 
   String? base64Img;
@@ -32,16 +34,16 @@ class _PerbaruiProdukState extends State<PerbaruiProduk> {
 
   File? tmpImg;
 
-  String filename = '';
+  // String filename = '';
 
-  _PerbaruiProdukState(this.product_id, this.name, this.price);
+  _PerbaruiProdukState(this.product_id, this.name, this.price, this.pictures);
 
   // ignore: non_constant_identifier_names
 
-  Future pickImage() async {
+  Future getImage() async {
     try {
-      final image = await ImagePicker()
-          .pickImage(source: ImageSource.gallery, imageQuality: 25);
+      final image = await ImagePicker().pickImage(
+          source: ImageSource.gallery, imageQuality: 55, maxWidth: 300);
 
       if (image == null) return;
 
@@ -59,8 +61,8 @@ class _PerbaruiProdukState extends State<PerbaruiProduk> {
 
   Future tagImage() async {
     try {
-      final image = await ImagePicker()
-          .pickImage(source: ImageSource.camera, imageQuality: 25);
+      final image = await ImagePicker().pickImage(
+          source: ImageSource.camera, imageQuality: 55, maxWidth: 300);
 
       if (image == null) return;
 
@@ -239,18 +241,28 @@ class _PerbaruiProdukState extends State<PerbaruiProduk> {
         ));
   }
 
+  String lengthDecodebase64(String bytes) {
+    if (bytes.length % 4 > 0) {
+      bytes += '=' * (4 - bytes.length % 4);
+    }
+    return bytes;
+  }
+
   Widget cekImage() {
     final tmpImg = this.tmpImg;
     if (tmpImg != null) {
-      filename = tmpImg.path.split('/').last;
+      // filename = tmpImg.path.split('/').last;
       base64Img = base64Encode(tmpImg.readAsBytesSync());
+      return Image.file(tmpImg);
+    } else if (pictures != '') {
+      base64Img = '';
+      String bytes = lengthDecodebase64(pictures.toString());
+      final _byteImage = Base64Decoder().convert(bytes);
+      return Image.memory(_byteImage);
     } else {
       base64Img = '';
+      return Text('Tidak ada gambar barang');
     }
-
-    return tmpImg != null
-        ? Image.file(tmpImg)
-        : const Text('Tidak ada gambar barang');
   }
 
   Future<void> reqUpdataProduk(BuildContext context) async {
@@ -261,13 +273,16 @@ class _PerbaruiProdukState extends State<PerbaruiProduk> {
       body: {
         'name': name,
         'price': price,
+        'tenan_id': tenan_id,
         // 'picture_name': filename,
-        // 'picture': base64Img,
+        'picture': base64Img,
       },
     );
 
-    print(name);
-    print(price);
+    print("n: " + name.toString());
+    print("n: " + price.toString());
+    print("n: " + tenan_id.toString());
+    print("base: " + base64Img.toString());
 
     if (response.statusCode == 200) {
       // ignore: use_build_context_synchronously
@@ -304,7 +319,7 @@ class _PerbaruiProdukState extends State<PerbaruiProduk> {
               children: [
                 OutlinedButton(
                   onPressed: () {
-                    pickImage();
+                    getImage();
                     Navigator.of(context).pop();
                   },
                   child: Column(

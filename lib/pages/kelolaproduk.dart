@@ -45,6 +45,13 @@ class KelolaProduk extends StatelessWidget {
     );
   }
 
+  String lengthDecodebase64(String bytes) {
+    if (bytes.length % 4 > 0) {
+      bytes += '=' * (4 - bytes.length % 4);
+    }
+    return bytes;
+  }
+
   FutureBuilder<List<dynamic>> futureTransaksi() {
     return FutureBuilder<List<dynamic>>(
         future: _transaksi(),
@@ -53,6 +60,10 @@ class KelolaProduk extends StatelessWidget {
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
+                String bytes = snapshot.data![index]['picture'].toString();
+                bytes = lengthDecodebase64(bytes);
+                final _byteImage = Base64Decoder().convert(bytes);
+
                 const icon2 = Icon(
                   Icons.image_not_supported_sharp,
                   size: 45,
@@ -63,8 +74,10 @@ class KelolaProduk extends StatelessWidget {
                 );
                 var imageView = snapshot.data![index]['picture'] == ""
                     ? icon1
-                    : Image.network(
-                        "${baseurl}img/produk/$tenan_id/${snapshot.data![index]['picture']}",
+                    : Image.memory(
+                        _byteImage,
+                        //  Image.network(
+                        //     "${baseurl}img/produk/$tenan_id/${snapshot.data![index]['picture']}",
                         // loadingBuilder: (context, child, loadingProgress) =>
                         //     (loadingProgress == null)
                         //         ? child
@@ -92,10 +105,11 @@ class KelolaProduk extends StatelessWidget {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => PerbaruiProduk(
-                                  snapshot.data![index]['product_id']
-                                      .toString(),
-                                  snapshot.data![index]['name'].toString(),
-                                  snapshot.data![index]['price'].toString()),
+                                snapshot.data![index]['product_id'].toString(),
+                                snapshot.data![index]['name'].toString(),
+                                snapshot.data![index]['price'].toString(),
+                                snapshot.data![index]['picture'].toString(),
+                              ),
                             ),
                           );
                         },
