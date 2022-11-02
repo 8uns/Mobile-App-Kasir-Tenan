@@ -239,7 +239,7 @@ class _TambahProdukState extends State<TambahProduk> {
                       : const Text(
                           'Tambahkan',
                           style: TextStyle(
-                            color: Colors.white,
+                            // color: Colors.white,
                             fontSize: 20,
                           ),
                         ),

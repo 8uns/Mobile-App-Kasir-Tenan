@@ -185,7 +185,7 @@ class _TambahStokProdukState extends State<TambahStokProduk> {
                       : const Text(
                           'Tambahkan',
                           style: TextStyle(
-                            color: Colors.white,
+                            // color: Colors.white,
                             fontSize: 20,
                           ),
                         ),
