@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:kasir_tenan_0_1/pages/billing.dart';
-import 'package:kasir_tenan_0_1/pages/inventaris.dart';
 import 'package:kasir_tenan_0_1/pages/kelolaproduk.dart';
 import 'package:kasir_tenan_0_1/pages/pengaturan.dart';
 import '../config.dart';
@@ -10,6 +9,9 @@ import './login.dart';
 import './transaksi.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'inventaris.dart';
+import 'inventarisMasuk.dart';
 
 class DrawerApp extends StatelessWidget {
   String billingApi = "${baseurl}api/billing/$token/notif";
@@ -127,7 +129,7 @@ class DrawerApp extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => Inventaris(''),
+                  builder: (context) => Inventaris('', 0),
                 ),
               );
             },

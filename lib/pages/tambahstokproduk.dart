@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:kasir_tenan_0_1/pages/inventaris.dart';
 import '../config.dart';
+import 'inventaris.dart';
 
 List<String> listSelect = <String>['One', 'Two', 'Three', 'Four'];
 
@@ -210,7 +210,7 @@ class _TambahStokProdukState extends State<TambahStokProduk> {
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => Inventaris(''),
+          builder: (context) => Inventaris('', 0),
         ),
       );
     } else {

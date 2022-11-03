@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:kasir_tenan_0_1/pages/inventaris.dart';
 import 'package:kasir_tenan_0_1/pages/kasir.dart';
 import '../config.dart';
+import 'inventaris.dart';
+import 'inventarisMasuk.dart';
 
 class KasirProduk extends StatefulWidget {
   @override
@@ -168,7 +168,7 @@ class _KasirProdukState extends State<KasirProduk> {
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => Inventaris(''),
+                                builder: (context) => InventarisMasuk(''),
                               ),
                             );
                           },

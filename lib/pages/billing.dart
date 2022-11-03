@@ -32,7 +32,9 @@ class Billing extends StatelessWidget {
     ];
 
     Size size = MediaQuery.of(context).size;
-    String showTahun = ambilTahun != '' ? ': ' + ambilTahun.toString() : '';
+    String showTahun = ambilTahun != ''
+        ? ': ' + ambilTahun.toString()
+        : ': ' + DateFormat('yyyy').format(DateTime.now()).toString();
 
     return Scaffold(
       appBar: AppBar(
