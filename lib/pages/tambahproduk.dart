@@ -226,8 +226,10 @@ class _TambahProdukState extends State<TambahProduk> {
                   ),
                   onPressed: () async {
                     if (name != null && quantity != null && price != null) {
-                      setState(() => isLoading = true);
-                      await reqTambahProduk(context);
+                      if (!isLoading) {
+                        setState(() => isLoading = true);
+                        await reqTambahProduk(context);
+                      }
                     } else {
                       _formKey.currentState!.validate();
                     }

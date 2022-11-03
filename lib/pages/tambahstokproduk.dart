@@ -173,8 +173,10 @@ class _TambahStokProdukState extends State<TambahStokProduk> {
                     if (quantity != null &&
                         quantity != 0 &&
                         product_id != null) {
-                      setState(() => isLoading = true);
-                      await reqTambahStokProduk(context);
+                      if (!isLoading) {
+                        setState(() => isLoading = true);
+                        await reqTambahStokProduk(context);
+                      }
                     } else {
                       _formKey.currentState!.validate();
                     }

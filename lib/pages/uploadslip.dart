@@ -73,6 +73,7 @@ class _UploadSlipState extends State<UploadSlip> {
   }
 
   final _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -178,19 +179,26 @@ class _UploadSlipState extends State<UploadSlip> {
                   ),
                 ),
                 onPressed: () async {
-                  await reqUploadSlip(context);
+                  if (!isLoading) {
+                    setState(() => isLoading = true);
+                    await reqUploadSlip(context);
+                  }
                 },
                 icon: const Icon(
                   Icons.upload,
                   color: Colors.white,
                 ),
-                label: const Text(
-                  'Upload Bukti Bayar',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
+                label: isLoading
+                    ? CircularProgressIndicator(
+                        color: Colors.white,
+                      )
+                    : const Text(
+                        'Upload Bukti Bayar',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
               ),
             ],
           ),

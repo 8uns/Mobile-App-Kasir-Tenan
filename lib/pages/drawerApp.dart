@@ -146,6 +146,23 @@ class DrawerApp extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
+                  builder: (context) => Inventaris('', 0),
+                ),
+              );
+            },
+            leading: Icon(
+              Icons.insert_chart_outlined_rounded,
+              size: 35,
+            ),
+            title: const Text(
+              "Pendapatan",
+              style: TextStyle(fontSize: 15),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
                   builder: (context) => Transaksi(''),
                 ),
               );
