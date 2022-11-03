@@ -62,7 +62,6 @@ class Billing extends StatelessWidget {
                   );
                 }).toList(),
                 onChanged: (String? value) {
-                  print("klick year : $value");
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => Billing(value.toString()),

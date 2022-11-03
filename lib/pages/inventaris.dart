@@ -29,7 +29,6 @@ class Inventaris extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("in out : " + inout.toString());
     return DefaultTabController(
       initialIndex: inout,
       length: tabProduk.length,

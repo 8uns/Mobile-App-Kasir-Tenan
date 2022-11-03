@@ -267,7 +267,6 @@ class _PerbaruiProdukState extends State<PerbaruiProduk> {
 
   Future<void> reqUpdataProduk(BuildContext context) async {
     var url = Uri.parse('${baseurl}api/produk/$token/$product_id');
-    print(url);
     var response = await http.post(
       url,
       body: {
@@ -278,11 +277,6 @@ class _PerbaruiProdukState extends State<PerbaruiProduk> {
         'picture': base64Img,
       },
     );
-
-    print("n: " + name.toString());
-    print("n: " + price.toString());
-    print("n: " + tenan_id.toString());
-    print("base: " + base64Img.toString());
 
     if (response.statusCode == 200) {
       // ignore: use_build_context_synchronously

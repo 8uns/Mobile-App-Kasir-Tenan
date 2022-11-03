@@ -49,7 +49,6 @@ class _PdfViewerState extends State<PdfViewer> {
             tooltip: 'Increase volume by 10',
             onPressed: () {
               setState(() {
-                // print("print dong");
                 Navigator.push(
                     context,
                     MaterialPageRoute(
