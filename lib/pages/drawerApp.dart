@@ -144,11 +144,11 @@ class DrawerApp extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => Inventaris('', 0),
-                ),
-              );
+              // Navigator.of(context).pushReplacement(
+              //   MaterialPageRoute(
+              //     builder: (context) => Inventaris('', 0),
+              //   ),
+              // );
             },
             leading: Icon(
               Icons.insert_chart_outlined_rounded,
