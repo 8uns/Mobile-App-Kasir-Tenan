@@ -1,8 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './login.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import '../config.dart';
+
+import 'kasir.dart';
 
 class Opening extends StatefulWidget {
   static const nameRoute = '/opening';
@@ -14,11 +18,34 @@ class Opening extends StatefulWidget {
 }
 
 class _OpeningState extends State<Opening> {
+  void getPreferenceLogin() async {
+    final pref = await SharedPreferences.getInstance();
+
+    if (pref.containsKey('username') &&
+        pref.containsKey('token') &&
+        pref.containsKey('acount_id')) {
+      fullname = pref.getString('fullname')!;
+      username = pref.getString('username')!;
+      token = pref.getString('token')!;
+      acount_id = pref.getString('acount_id')!;
+      imageTenan = pref.getString('imageTenan')!;
+      nameTenan = pref.getString('nameTenan')!;
+      tenan_id = pref.getString('tenan_id')!;
+
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => Kasir(),
+        ),
+      );
+    } else {
+      Navigator.of(context).pushNamed(Login.nameRoute);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 2),
-        () => Navigator.of(context).pushNamed(Login.nameRoute));
+    Timer(const Duration(seconds: 2), () => getPreferenceLogin());
   }
 
   @override

@@ -118,6 +118,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -247,6 +252,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  month_year_picker:
+    dependency: "direct main"
+    description:
+      name: month_year_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0+3"
   nested:
     dependency: transitive
     description:
@@ -569,4 +581,4 @@ packages:
     version: "6.1.0"
 sdks:
   dart: ">=2.17.0 <3.0.0"
-  flutter: ">=2.8.1"
+  flutter: ">=3.0.0"

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:kasir_tenan_0_1/pages/kasir.dart';
 import '../config.dart';
-import 'inventaris.dart';
 import 'inventarisMasuk.dart';
 
 class KasirProduk extends StatefulWidget {

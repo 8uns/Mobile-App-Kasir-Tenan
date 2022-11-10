@@ -36,9 +36,7 @@ class _TransaksiState extends State<Transaksi> {
 
   @override
   Widget build(BuildContext context) {
-    String dates = dateTrans != ''
-        ? ': ${dateTrans}'
-        : ": " + DateFormat('yyyy-MM-dd').format(DateTime.now()).toString();
+    String dates = dateTrans != '' ? ': ${dateTrans}' : 'Terbaru';
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(

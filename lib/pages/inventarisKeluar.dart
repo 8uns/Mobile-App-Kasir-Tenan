@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:kasir_tenan_0_1/pages/tambahstokproduk.dart';
-import './drawerApp.dart';
 import 'package:http/http.dart' as http;
 import '../config.dart';
 import 'inventaris.dart';
@@ -35,9 +33,7 @@ class _InventarisKeluarState extends State<InventarisKeluar> {
 
   @override
   Widget build(BuildContext context) {
-    String dates = dateTrans != ''
-        ? '${dateTrans}'
-        : DateFormat('yyyy-MM-dd').format(DateTime.now()).toString();
+    String dates = dateTrans != '' ? '${dateTrans}' : 'Terbaru';
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(

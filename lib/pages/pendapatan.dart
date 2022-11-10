@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:kasir_tenan_0_1/pages/pendapatanBulanan.dart';
+import 'package:kasir_tenan_0_1/pages/pendapatanHarian.dart';
 import './drawerApp.dart';
-import 'inventarisKeluar.dart';
-import 'inventarisMasuk.dart';
 
-class Inventaris extends StatelessWidget {
+class Pendatapan extends StatelessWidget {
   static const nameRoute = '/kasir';
   int notifBil = 0;
-  String dateTrans;
+  String bulan = '';
+  String tahun = '';
+  String tgl = '';
   int inout;
-  Inventaris(this.dateTrans, this.inout);
+  Pendatapan(this.bulan, this.tahun, this.tgl, this.inout);
 
   List<Tab> tabProduk = [
-    const Tab(
-      text: 'Data Masuk',
+    Tab(
+      text: 'Harian',
     ),
-    const Tab(
-      text: 'Data Keluar',
+    Tab(
+      text: 'Bulanan',
     ),
   ];
 
@@ -28,7 +30,7 @@ class Inventaris extends StatelessWidget {
         appBar: AppBar(
           actions: [],
           backgroundColor: Colors.amber[600],
-          title: Text("Inventaris"),
+          title: Text("Pendapatan"),
           bottom: TabBar(
             indicatorColor: Colors.white,
             tabs: tabProduk,
@@ -38,10 +40,10 @@ class Inventaris extends StatelessWidget {
         body: TabBarView(
           children: [
             Center(
-              child: InventarisMasuk(dateTrans),
+              child: pendapatanHarian(tgl),
             ),
             Center(
-              child: InventarisKeluar(dateTrans),
+              child: pendapatanBulanan(bulan, tahun),
             ),
           ],
         ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:kasir_tenan_0_1/pages/billing.dart';
 import 'package:kasir_tenan_0_1/pages/kelolaproduk.dart';
+import 'package:kasir_tenan_0_1/pages/pendapatan.dart';
 import 'package:kasir_tenan_0_1/pages/pengaturan.dart';
 import '../config.dart';
 import './kasir.dart';
@@ -11,7 +12,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'inventaris.dart';
-import 'inventarisMasuk.dart';
 
 class DrawerApp extends StatelessWidget {
   String billingApi = "${baseurl}api/billing/$token/notif";
@@ -44,11 +44,6 @@ class DrawerApp extends StatelessWidget {
             onTap: () {
               Navigator.pushAndRemoveUntil(context,
                   MaterialPageRoute(builder: (_) => Kasir()), (route) => false);
-              // Navigator.of(context).pushReplacement(
-              //   MaterialPageRoute(
-              //     builder: (context) => Kasir(),
-              //   ),
-              // );
             },
             leading: Icon(
               Icons.point_of_sale,
@@ -65,11 +60,6 @@ class DrawerApp extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (_) => Billing('')),
                   (route) => false);
-              // Navigator.of(context).pushReplacement(
-              //   MaterialPageRoute(
-              //     builder: (context) => Billing(''),
-              //   ),
-              // );
             },
             leading: Icon(
               Icons.request_quote,
@@ -120,11 +110,6 @@ class DrawerApp extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (_) => KelolaProduk()),
                   (route) => false);
-              // Navigator.of(context).pushReplacement(
-              //   MaterialPageRoute(
-              //     builder: (context) => KelolaProduk(),
-              //   ),
-              // );
             },
             leading: Icon(
               Icons.view_in_ar_rounded,
@@ -141,11 +126,6 @@ class DrawerApp extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (_) => Inventaris('', 0)),
                   (route) => false);
-              // Navigator.of(context).pushReplacement(
-              //   MaterialPageRoute(
-              //     builder: (context) => Inventaris('', 0),
-              //   ),
-              // );
             },
             leading: Icon(
               Icons.inventory,
@@ -162,11 +142,6 @@ class DrawerApp extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (_) => Transaksi('')),
                   (route) => false);
-              // Navigator.of(context).pushReplacement(
-              //   MaterialPageRoute(
-              //     builder: (context) => Transaksi(''),
-              //   ),
-              // );
             },
             leading: Icon(
               Icons.receipt_long,
@@ -181,13 +156,8 @@ class DrawerApp extends StatelessWidget {
             onTap: () {
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (_) => Pengaturan()),
+                  MaterialPageRoute(builder: (_) => Pendatapan('', '', '', 0)),
                   (route) => false);
-              // Navigator.of(context).pushReplacement(
-              //   MaterialPageRoute(
-              //     builder: (context) => Pengaturan(),
-              //   ),
-              // );
             },
             leading: Icon(
               Icons.insert_chart_outlined_rounded,
@@ -213,11 +183,6 @@ class DrawerApp extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (_) => Pengaturan()),
                   (route) => false);
-              // Navigator.of(context).pushReplacement(
-              //   MaterialPageRoute(
-              //     builder: (context) => Pengaturan(),
-              //   ),
-              // );
             },
             leading: Icon(
               Icons.manage_accounts,
@@ -233,12 +198,6 @@ class DrawerApp extends StatelessWidget {
               clearPref();
               Navigator.pushAndRemoveUntil(context,
                   MaterialPageRoute(builder: (_) => Login()), (route) => false);
-
-              // Navigator.of(context).pushReplacement(
-              //   MaterialPageRoute(
-              //     builder: (context) => Login(),
-              //   ),
-              // );
             },
             leading: Icon(
               color: Colors.deepOrange[900],
