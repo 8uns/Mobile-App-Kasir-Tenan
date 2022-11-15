@@ -189,7 +189,7 @@ class DrawerApp extends StatelessWidget {
               size: 35,
             ),
             title: const Text(
-              "Pengaturan Akun",
+              "Informasi Akun",
               style: TextStyle(fontSize: 15),
             ),
           ),
