@@ -12,3 +12,4 @@ String nameTenan = '';
 String imageTenan = '';
 String fullname = '';
 String tenan_id = '';
+String masa_kontrak = '';

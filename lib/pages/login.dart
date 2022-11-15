@@ -30,6 +30,7 @@ class _LoginState extends State<Login> {
     pref.setString('token', data['token'].toString());
     pref.setString('acount_id', data['acount_id'].toString());
     pref.setString('tenan_id', data['tenan_id'].toString());
+    pref.setString('masa_kontrak', data['contract_period'].toString());
 
     fullname = pref.getString('fullname')!;
     username = pref.getString('username')!;
@@ -38,6 +39,7 @@ class _LoginState extends State<Login> {
     imageTenan = pref.getString('imageTenan')!;
     nameTenan = pref.getString('nameTenan')!;
     tenan_id = pref.getString('tenan_id')!;
+    masa_kontrak = pref.getString('masa_kontrak')!;
 
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
@@ -64,6 +66,7 @@ class _LoginState extends State<Login> {
       imageTenan = pref.getString('imageTenan')!;
       nameTenan = pref.getString('nameTenan')!;
       tenan_id = pref.getString('tenan_id')!;
+      masa_kontrak = pref.getString('masa_kontrak')!;
 
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(

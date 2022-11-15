@@ -108,7 +108,10 @@ class _pendapatanHarianState extends State<pendapatanHarian> {
                 return Column(
                   children: [
                     ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        showdialogTransaksiDetail(context, snapshot, index,
+                            "${baseurl}api/item/$token/${snapshot.data![index]['transaction_id']}");
+                      },
                       title:
                           Text("${snapshot.data![index]['transaction_id']} "),
                       subtitle: Text(
@@ -126,4 +129,97 @@ class _pendapatanHarianState extends State<pendapatanHarian> {
           }
         });
   }
+}
+
+Future<dynamic> showdialogTransaksiDetail(BuildContext context,
+    AsyncSnapshot<List<dynamic>> snapshot, int index, String apiDetTrans) {
+  Future<List<dynamic>> _transaksiDetail() async {
+    var result = await http.get(Uri.parse(apiDetTrans));
+    return json.decode(result.body)['data'];
+  }
+
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return StatefulBuilder(builder: (context, setState) {
+        return AlertDialog(
+          backgroundColor: Colors.grey[50],
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    "Transaksi",
+                    style: TextStyle(
+                      fontSize: 19,
+                    ),
+                  ),
+                  Text(
+                    snapshot.data![index]['transaction_id'].toString(),
+                    style: const TextStyle(
+                      fontSize: 15,
+                    ),
+                  )
+                ],
+              ),
+              Text(
+                snapshot.data![index]['date'],
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            ],
+          ),
+          content: Container(
+            width: double.minPositive,
+            child: FutureBuilder<List<dynamic>>(
+              future: _transaksiDetail(),
+              builder: (context, snap) {
+                if (snap.hasData) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: snap.data!.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(snap.data![index]['name']),
+                        subtitle: Text("Rp. ${snap.data![index]['price']}"),
+                        trailing: Text("${snap.data![index]['quantity']} X"),
+                      );
+                    },
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
+            ),
+          ),
+          actions: [
+            Container(
+              child: ListTile(
+                title: Text(
+                  "Total : ",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                // subtitle:
+                // Text("Rp. ${Random().nextInt(100000)}"),
+                trailing: Text(
+                  "Rp. ${snapshot.data![index]['total_harian']}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      });
+    },
+  );
 }

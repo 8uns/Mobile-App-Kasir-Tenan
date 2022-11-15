@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kasir_tenan_0_1/config.dart';
 import 'drawerApp.dart';
 
 class Pengaturan extends StatelessWidget {
@@ -44,7 +45,7 @@ class Pengaturan extends StatelessWidget {
                 ),
                 Container(
                   child: Text(
-                    'Hanya Sampel',
+                    '$nameTenan',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -69,7 +70,7 @@ class Pengaturan extends StatelessWidget {
                 ),
                 Container(
                   child: Text(
-                    'Hanya Sampel',
+                    '$fullname',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -94,7 +95,7 @@ class Pengaturan extends StatelessWidget {
                 ),
                 Container(
                   child: Text(
-                    'Hanya Sampel',
+                    '$username',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -119,7 +120,7 @@ class Pengaturan extends StatelessWidget {
                 ),
                 Container(
                   child: Text(
-                    '12/12/1212',
+                    '$masa_kontrak',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -137,7 +138,6 @@ class Pengaturan extends StatelessWidget {
                   margin: const EdgeInsets.only(
                     top: 50,
                   ),
-                  child: const Text('Dalam Pengembangan'),
                 ),
               ],
             ),
